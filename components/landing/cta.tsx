@@ -4,7 +4,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FaArrowRight, FaSparkles } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 export function CTA() {
@@ -47,7 +47,6 @@ export function CTA() {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center">
           {" "}
-          <FaSparkles className="w-16 h-16 text-white mx-auto mb-6 animate-pulse" />{" "}
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {" "}
             Ready to Start Your Journey?{" "}
