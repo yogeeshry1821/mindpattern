@@ -9,12 +9,12 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex flex-col">
       {/* Header */}
       <div className="p-4">
         <Link href="/" className="flex items-center space-x-2 group">
           <FaBrain className="h-8 w-8 text-primary-600 transition-transform group-hover:scale-110" />
-          <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
+          <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-bold">
             MindPattern
           </span>
         </Link>

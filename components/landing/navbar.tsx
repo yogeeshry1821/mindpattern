@@ -20,7 +20,7 @@ export function Navbar() {
             <FaBrain className="h-8 w-8 text-primary-600 transition-transform group-hover:scale-110" />
             <div className="absolute inset-0 bg-primary-400 blur-xl opacity-0 group-hover:opacity-30 transition-opacity" />
           </div>
-          <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
+          <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-bold">
             MindPattern
           </span>
         </Link>

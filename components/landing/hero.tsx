@@ -75,12 +75,14 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight">
-            Understand Your Mind,
+            className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+            Try understanding your Mind,
             <br />
-            <span className="bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              One Entry at a Time
-            </span>
+            <div className="bg-red-100  inline-block px-6 rounded-4xl ">
+              <span className="bg-gradient-to-r from-primary-800 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                If you really can
+              </span>
+            </div>
           </motion.h1>
 
           <motion.p
@@ -101,7 +103,7 @@ export function Hero() {
               <Button
                 size="lg"
                 className="text-lg px-8 py-6 bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white shadow-2xl hover:shadow-primary-500/50 transition-all group">
-                Start Journaling Free
+                Start Journaling Freely
                 <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
