@@ -32,7 +32,7 @@ export function Navbar() {
             </Button>
           </Link>
           <Link href="/signup">
-            <Button className="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all">
+            <Button className="bg-linear-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all">
               Get Started
             </Button>
           </Link>

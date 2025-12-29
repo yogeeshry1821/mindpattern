@@ -43,18 +43,18 @@ export default function SignupPage() {
       });
 
       const result = await response.json();
-
+console.log("response", response.status);
+      
       if (!response.ok) {
         throw new Error(result.error || "Something went wrong");
       }
-
       // Auto login after signup
       const signInResult = await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,
       });
-
+      console.log("signInResult",signInResult);
       if (signInResult?.error) {
         throw new Error(
           "Account created but login failed. Please login manually."

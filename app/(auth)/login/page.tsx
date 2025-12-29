@@ -19,7 +19,7 @@ export default function LoginPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
+  console.log("asdf");
   const {
     register,
     handleSubmit,
@@ -31,22 +31,26 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginInput) => {
     setIsLoading(true);
     setError("");
-
     try {
+      console.log("data 1", data);
+
       const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,
       });
+      console.log("result", result);
+      //if (result?.error) {
+      //  throw new Error("Invalid email or password");
+      //}
 
-      if (result?.error) {
-        throw new Error("Invalid email or password");
-      }
-
-      router.push("/dashboard");
-      router.refresh();
+      //router.push("/dashboard");
     } catch (error: any) {
-      setError(error.message);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     } finally {
       setIsLoading(false);
     }
