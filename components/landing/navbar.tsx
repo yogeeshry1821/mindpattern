@@ -1,43 +1,52 @@
 // components/landing/navbar.tsx
-
 "use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FaBrain } from "react-icons/fa";
-import { motion } from "framer-motion";
 
 export function Navbar() {
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b bg-white/80 backdrop-blur-lg supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2 group">
-          <div className="relative">
-            <FaBrain className="h-8 w-8 text-primary-600 transition-transform group-hover:scale-110" />
-            <div className="absolute inset-0 bg-primary-400 blur-xl opacity-0 group-hover:opacity-30 transition-opacity" />
-          </div>
-          <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-bold">
-            MindPattern
-          </span>
-        </Link>
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center">
+      {/* 1. Same max-w-7xl as your Hero 
+          2. Same px-12 md:px-20 as your Hero 
+          3. w-full so it spans the container correctly
+      */}
+      <nav className="w-full max-w-7xl px-12 md:px-20">
+        <div className="h-14 rounded-full border border-black/[0.04] bg-white/70 backdrop-blur-xl px-6 flex items-center justify-between shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+          {/* Logo starts exactly where the 'Most people...' text starts */}
+          <Link href="/" className="flex items-center space-x-2">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            </svg>
+            <span className="text-md font-semibold tracking-tighter text-[#1a1a1a]">
+              MindPattern
+            </span>
+          </Link>
 
-        <div className="flex items-center space-x-4">
-          <Link href="/login">
-            <Button variant="ghost" className="hidden sm:inline-flex">
+          {/* Navigation */}
+          <div className="flex items-center space-x-10">
+            <Link
+              href="/login"
+              className="text-[13px] font-medium text-black/40 hover:text-black transition-colors">
               Login
-            </Button>
-          </Link>
-          <Link href="/signup">
-            <Button className="bg-linear-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all">
-              Get Started
-            </Button>
-          </Link>
+            </Link>
+            <Link href="/signup">
+              <Button className="h-8 px-5 bg-[#1a1a1a] text-white rounded-full text-[11px] font-bold uppercase tracking-wider transition-all hover:bg-black">
+                Get Started
+              </Button>
+            </Link>
+          </div>
         </div>
-      </div>
-    </motion.nav>
+      </nav>
+    </div>
   );
 }

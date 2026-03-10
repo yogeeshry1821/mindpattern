@@ -1,130 +1,134 @@
 // components/landing/footer.tsx
+"use client";
 
 import Link from "next/link";
-import { FaBrain, FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="border-t bg-slate-50 py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <Link href="/" className="flex items-center space-x-2 mb-4">
-              <FaBrain className="h-8 w-8 text-primary-600" />
-              <span className="text-xl font-bold text-slate-900">
+    <footer className="bg-surface-soft border-t border-ink-primary/[0.02] pt-32 pb-12">
+      <div className="container mx-auto max-w-7xl px-12 md:px-20">
+        {/* Top Section: Brand Statement & Navigation */}
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-20 mb-32">
+          <div className="max-w-sm">
+            <div className="flex items-center space-x-3 mb-8">
+              <div className="h-4 w-4 rounded-full border border-ink-primary/20 flex items-center justify-center">
+                <div className="h-1 w-1 bg-ink-primary rounded-full" />
+              </div>
+              <span className="text-sm font-bold tracking-tighter uppercase text-ink-primary">
                 MindPattern
               </span>
-            </Link>
-            <p className="text-slate-600 text-sm">
-              AI-powered mental health journaling platform helping you
-              understand your mind better.
+            </div>
+            <p className="text-2xl font-medium tracking-tighter text-ink-primary leading-tight">
+              Decoding the invisible architecture of your mind.
             </p>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-slate-900 mb-4">Product</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/features"
-                  className="text-slate-600 hover:text-primary-600 transition-colors">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/pricing"
-                  className="text-slate-600 hover:text-primary-600 transition-colors">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/security"
-                  className="text-slate-600 hover:text-primary-600 transition-colors">
-                  Security
-                </Link>
-              </li>
-            </ul>
+          {/* Navigation Links */}
+          <div className="flex flex-wrap gap-x-24 gap-y-12">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-ink-tertiary block mb-6">
+                Product
+              </span>
+              <ul className="space-y-4 text-[13px] font-medium text-ink-secondary">
+                <li>
+                  <Link
+                    href="/method"
+                    className="hover:text-ink-primary transition-colors">
+                    Method
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/security"
+                    className="hover:text-ink-primary transition-colors">
+                    Privacy/AES-256
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/pricing"
+                    className="hover:text-ink-primary transition-colors">
+                    Membership
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-ink-tertiary block mb-6">
+                Connect
+              </span>
+              <ul className="space-y-4 text-[13px] font-medium text-ink-secondary">
+                <li>
+                  <Link
+                    href="https://x.com"
+                    className="hover:text-ink-primary transition-colors italic font-serif">
+                    @mindpattern
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="https://github.com"
+                    className="hover:text-ink-primary transition-colors">
+                    Github
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-ink-tertiary block mb-6">
+                Legal
+              </span>
+              <ul className="space-y-4 text-[13px] font-medium text-ink-secondary">
+                <li>
+                  <Link
+                    href="/terms"
+                    className="hover:text-ink-primary transition-colors">
+                    Terms
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/ethics"
+                    className="hover:text-ink-primary transition-colors">
+                    AI Ethics
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
+        </div>
 
-          <div>
-            <h3 className="font-semibold text-slate-900 mb-4">Company</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-slate-600 hover:text-primary-600 transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-slate-600 hover:text-primary-600 transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-slate-600 hover:text-primary-600 transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
+        {/* System Status Bar: The "Scientific" Detail */}
+        <div className="border-t border-ink-primary/[0.05] pt-12">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            {/* Left: Metadata */}
+            <div className="flex items-center space-x-8 text-[10px] font-mono uppercase tracking-[0.2em] text-ink-tertiary">
+              <div className="flex items-center space-x-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-green-500/80 animate-pulse" />
+                <span>System Operational</span>
+              </div>
+              <div className="hidden md:block">v2.4.0-Stable</div>
+              <div className="hidden md:block">
+                Lat: 12.9716° N / Lon: 77.5946° E
+              </div>
+            </div>
 
-          <div>
-            <h3 className="font-semibold text-slate-900 mb-4">Legal</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/privacy"
-                  className="text-slate-600 hover:text-primary-600 transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terms"
-                  className="text-slate-600 hover:text-primary-600 transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-            </ul>
+            {/* Right: Copyright & Tagline */}
+            <div className="flex flex-col items-center md:items-end text-right">
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-ink-tertiary mb-2">
+                © {currentYear} MindPattern Studio
+              </p>
+              <p className="text-[10px] font-serif italic text-ink-tertiary opacity-60">
+                Built for the evolution of thought.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-600 text-sm">
-            © 2025 MindPattern. Your mental health matters.
-          </p>
-
-          <div className="flex gap-4">
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-primary-600 transition-colors">
-              <FaTwitter className="w-5 h-5" />
-            </a>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-primary-600 transition-colors">
-              <FaGithub className="w-5 h-5" />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-primary-600 transition-colors">
-              <FaLinkedin className="w-5 h-5" />
-            </a>
-          </div>
-        </div>
+        {/* Closing Visual: Fading Line */}
+        <div className="mt-12 h-[1px] w-full bg-gradient-to-r from-transparent via-ink-primary/[0.05] to-transparent" />
       </div>
     </footer>
   );
