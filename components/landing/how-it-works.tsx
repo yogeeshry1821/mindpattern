@@ -56,7 +56,7 @@ export function HowItWorks() {
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-semibold tracking-tighter text-ink-primary mb-8">
             The path to <br />
-            <span className="text-ink-tertiary italic font-serif">
+            <span className="text-ink-tertiary italic font-serif mt-2">
               radical self-clarity.
             </span>
           </motion.h2>

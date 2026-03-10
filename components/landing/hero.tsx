@@ -2,8 +2,11 @@
 "use client";
 import { motion } from "framer-motion";
 import { NeuralBackground } from "./neural-background";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 export function Hero() {
+  const router = useRouter();
   return (
     <section className="relative min-h-screen flex items-center bg-[#f9f9fb] overflow-hidden">
       <NeuralBackground />
@@ -41,9 +44,9 @@ export function Hero() {
             </p>
 
             <div className="flex items-center space-x-4">
-              <button className="h-14 px-10 bg-[#1a1a1a] text-white rounded-full font-medium tracking-tight hover:bg-black transition-all shadow-2xl shadow-black/10">
+              <Button onClick={()=>(router.push('/signup'))} className="h-14 px-10 bg-[#1a1a1a] text-white rounded-full font-medium tracking-tight hover:bg-black transition-all shadow-2xl shadow-black/10">
                 Start the Experience
-              </button>
+              </Button>
               <button className="group h-14 w-14 rounded-full border border-black/5 bg-white/50 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:border-black/20 transition-all">
                 <svg
                   width="20"

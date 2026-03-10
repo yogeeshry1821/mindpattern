@@ -1,5 +1,3 @@
-// app/(auth)/login/page.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -8,10 +6,10 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
 import { loginSchema, type LoginInput } from "@/lib/validations/auth";
 import { FaGoogle, FaSpinner } from "react-icons/fa";
 
@@ -31,7 +29,6 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginInput) => {
     setIsLoading(true);
     setError("");
-
     try {
       const result = await signIn("credentials", {
         email: data.email,
@@ -39,10 +36,8 @@ export default function LoginPage() {
         redirect: false,
       });
 
-      console.log("SignIn result:", result); // Debug log
-
       if (result?.error) {
-        setError("Invalid email or password");
+        setError("Identity could not be verified.");
         setIsLoading(false);
         return;
       }
@@ -52,53 +47,84 @@ export default function LoginPage() {
         router.refresh();
       }
     } catch (error: any) {
-      console.error("Login error:", error);
-      setError("An error occurred during login");
+      setError("A system error occurred.");
       setIsLoading(false);
     }
   };
 
-  return (
-    <Card className="w-full max-w-md p-8 shadow-2xl">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">Welcome back</h1>
-        <p className="text-slate-600">Login to continue your journey</p>
+return (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
+    <div className="bg-white border border-black/[0.03] rounded-[40px] p-8 md:p-10 shadow-sm">
+      {/* REMOVED the redundant logo Link here */}
+      <div className="text-center mb-10 pt-4">
+        <h1 className="text-3xl font-semibold tracking-tighter text-[#1a1a1a] mb-2">
+          Welcome Back
+        </h1>
+        <p className="text-[#8a8a8a] text-sm italic font-serif">
+          Resume your journey into self-clarity.
+        </p>
       </div>
-
+      {/* Error Alert */}
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-sm text-red-600">{error}</p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="mb-6 p-4 bg-red-50/50 border border-red-100 rounded-2xl">
+          <p className="text-xs font-medium text-red-600 text-center uppercase tracking-widest">
+            {error}
+          </p>
+        </motion.div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div>
-          <Label htmlFor="email">Email</Label>
+      {/* Login Form */}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <div className="space-y-2">
+          <Label
+            htmlFor="email"
+            className="text-[10px] uppercase tracking-[0.2em] text-ink-tertiary font-bold ml-1">
+            Email Address
+          </Label>
           <Input
             id="email"
             type="email"
-            placeholder="john@example.com"
+            placeholder="name@example.com"
             {...register("email")}
-            className="mt-1"
+            className="h-12 rounded-2xl border-black/[0.05] bg-surface-soft/50 focus:bg-white transition-all px-5 placeholder:text-ink-tertiary/40"
             disabled={isLoading}
           />
           {errors.email && (
-            <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
+            <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider ml-1">
+              {errors.email.message}
+            </p>
           )}
         </div>
 
-        <div>
-          <Label htmlFor="password">Password</Label>
+        <div className="space-y-2">
+          <div className="flex justify-between items-center ml-1">
+            <Label
+              htmlFor="password"
+              className="text-[10px] uppercase tracking-[0.2em] text-ink-tertiary font-bold">
+              Security Key
+            </Label>
+            <Link
+              href="#"
+              className="text-[10px] uppercase tracking-[0.2em] text-ink-tertiary/60 hover:text-ink-primary">
+              Forgot?
+            </Link>
+          </div>
           <Input
             id="password"
             type="password"
             placeholder="••••••••"
             {...register("password")}
-            className="mt-1"
+            className="h-12 rounded-2xl border-black/[0.05] bg-surface-soft/50 focus:bg-white transition-all px-5 placeholder:text-ink-tertiary/40"
             disabled={isLoading}
           />
           {errors.password && (
-            <p className="text-sm text-red-600 mt-1">
+            <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider ml-1">
               {errors.password.message}
             </p>
           )}
@@ -106,49 +132,53 @@ export default function LoginPage() {
 
         <Button
           type="submit"
-          className="w-full bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700"
+          className="w-full h-12 bg-ink-primary text-white rounded-2xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-black transition-all shadow-xl shadow-black/5 active:scale-[0.98]"
           disabled={isLoading}>
           {isLoading ? (
-            <>
-              <FaSpinner className="mr-2 animate-spin" />
-              Logging in...
-            </>
+            <FaSpinner className="animate-spin text-lg" />
           ) : (
-            "Login"
+            "Verify Identity"
           )}
         </Button>
       </form>
 
-      <div className="mt-6">
+      {/* Social Auth Separator */}
+      <div className="mt-8">
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-slate-300" />
+            <div className="w-full border-t border-black/[0.03]" />
           </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-slate-500">
-              Or continue with
-            </span>
+          <div className="relative flex justify-center text-[10px] uppercase tracking-[0.3em]">
+            <span className="px-4 bg-white text-ink-tertiary">Third Party</span>
           </div>
         </div>
 
         <Button
           variant="outline"
-          className="w-full mt-4"
+          className="w-full h-12 mt-6 rounded-2xl border-black/[0.05] text-ink-secondary text-xs font-bold uppercase tracking-widest hover:bg-surface-soft transition-all"
           disabled
           type="button">
-          <FaGoogle className="mr-2" />
-          Google (Coming Soon)
+          <FaGoogle className="mr-3 opacity-60" />
+          Google Authentication
         </Button>
       </div>
 
-      <p className="text-center text-sm text-slate-600 mt-6">
-        Don't have an account?{" "}
+      {/* Redirect to Signup */}
+      <p className="text-center text-[11px] uppercase tracking-[0.1em] text-ink-tertiary mt-8">
+        New to the pattern?{" "}
         <Link
           href="/signup"
-          className="text-primary-600 hover:text-primary-700 font-semibold">
-          Sign up
+          className="text-ink-primary font-bold hover:underline underline-offset-4">
+          Join the evolution
         </Link>
       </p>
-    </Card>
-  );
+    </div>
+
+    {/* Footer Metadata (Visible on long screens) */}
+    <div className="mt-8 mb-12 flex justify-center space-x-6 text-[9px] font-mono uppercase tracking-[0.2em] text-ink-tertiary opacity-40">
+      <span>Encrypted: AES-256</span>
+      <span>Status: Secure</span>
+    </div>
+  </motion.div>
+);
 }

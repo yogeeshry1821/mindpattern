@@ -25,7 +25,6 @@ html, body {
   margin: 0;
   padding: 0;
   /* Prevent the body from scrolling; only the 'main' container in page.tsx will scroll */
-  overflow: hidden; 
 }
 @layer base {
   body {
