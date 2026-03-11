@@ -101,25 +101,46 @@ export function HowItWorks() {
                   <p className="text-xl text-ink-secondary leading-relaxed mb-10 tracking-tight">
                     {step.desc}
                   </p>
-
                   <div className="pl-8 border-l border-ink-primary/10 italic font-serif text-lg text-ink-tertiary">
                     &ldquo;{step.sub}&rdquo;
                   </div>
-
                   {/* High-End Visual Anchor */}
-                  <div className="mt-20 relative w-full aspect-[16/9] rounded-[40px] border border-ink-primary/[0.03] bg-white overflow-hidden group shadow-sm">
-                    <div
-                      className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity"
-                      style={{
-                        backgroundImage:
-                          "radial-gradient(#000 1px, transparent 1px)",
-                        backgroundSize: "30px 30px",
-                      }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-[10px] font-mono text-ink-tertiary uppercase tracking-[0.6em]">
-                        Data Stream 0{index + 1}
-                      </div>
+                  // Replace the "Visual Anchor" div with this
+                  <div className="mt-20 relative w-full aspect-[16/9] rounded-[40px] border border-ink-primary/[0.05] bg-white overflow-hidden group shadow-sm flex items-center justify-center">
+                    <svg
+                      width="100%"
+                      height="100%"
+                      viewBox="0 0 400 200"
+                      className="opacity-40">
+                      <motion.path
+                        d={
+                          index === 0
+                            ? "M0 100 Q 50 20, 100 100 T 200 100 T 300 100 T 400 100" // Chaotic
+                            : index === 1
+                              ? "M0 100 L 400 100" // Structured
+                              : "M200 100 m -40, 0 a 40,40 0 1,0 80,0 a 40,40 0 1,0 -80,0" // Focused
+                        }
+                        fill="transparent"
+                        stroke="currentColor"
+                        strokeWidth="1"
+                        className="text-ink-primary"
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        transition={{ duration: 2, ease: "easeInOut" }}
+                      />
+                    </svg>
+
+                    {/* Floating Label */}
+                    <div className="absolute bottom-8 right-8 flex flex-col items-end">
+                      <span className="text-[9px] font-mono text-ink-tertiary uppercase tracking-widest opacity-50">
+                        System.Status:{" "}
+                        {index === 0
+                          ? "Sampling"
+                          : index === 1
+                            ? "Mapping"
+                            : "Optimized"}
+                      </span>
+                      <div className="h-[1px] w-12 bg-ink-primary/20 mt-2" />
                     </div>
                   </div>
                 </motion.div>

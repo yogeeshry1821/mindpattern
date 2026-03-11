@@ -36,10 +36,10 @@ model Journal {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relations
+  analysis  Json?    
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // Indexes
   @@index([userId])
   @@index([createdAt])
   @@map("journals")

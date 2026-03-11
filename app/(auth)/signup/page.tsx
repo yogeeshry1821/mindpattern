@@ -1,12 +1,12 @@
 // app/(auth)/signup/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,7 @@ import { FaGoogle, FaSpinner } from "react-icons/fa";
 
 export default function SignupPage() {
   const router = useRouter();
+  const { status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -26,6 +27,12 @@ export default function SignupPage() {
   } = useForm<SignupInput>({
     resolver: zodResolver(signupSchema),
   });
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/dashboard");
+    }
+  }, [router, status]);
 
   const onSubmit = async (data: SignupInput) => {
     setIsLoading(true);
@@ -47,19 +54,22 @@ export default function SignupPage() {
       const signInResult = await signIn("credentials", {
         email: data.email,
         password: data.password,
+        callbackUrl: "/dashboard",
         redirect: false,
       });
 
-      if (signInResult?.error) {
+      if (signInResult?.error || !signInResult?.url) {
         throw new Error(
           "Account created but login failed. Please login manually.",
         );
       }
 
-      router.push("/dashboard");
+      router.replace(signInResult.url);
       router.refresh();
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "A system error occurred.";
+      setError(message);
     } finally {
       setIsLoading(false);
     }

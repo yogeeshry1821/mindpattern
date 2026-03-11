@@ -45,11 +45,6 @@ export function Navbar({
       name: "Neural Journal",
       desc: "AI-driven emotional pattern mapping.",
     },
-    {
-      name: "Focus Flow",
-      desc: "Scientific deep-work environment.",
-
-    },
     { name: "Echo Analysis", desc: "Voice-to-insight synthesis." },
   ];
 
@@ -109,7 +104,8 @@ export function Navbar({
                       <button
                         key={product.name}
                         className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-black/5 transition-all text-left">
-\                        <div>
+                        \{" "}
+                        <div>
                           <p className="text-[11px] font-bold uppercase tracking-tighter text-black">
                             {product.name}
                           </p>
@@ -136,7 +132,7 @@ export function Navbar({
         </div>
 
         {/* Action */}
-        <div className="flex items-center space-x-6 relative z-10">
+        <div className="flex items-center space-x-6 relative z-10 hover:cursor-pointer ">
           <Link
             href="/login"
             className="text-[12px] font-bold uppercase tracking-widest text-black/60 hover:text-black">
@@ -144,7 +140,7 @@ export function Navbar({
           </Link>
           <Button
             onClick={() => router.push("/signup")}
-            className="h-9 px-6 bg-black text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-800 transition-all shadow-lg shadow-black/5">
+            className="h-9 px-6 bg-black text-white hover:cursor-pointer rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-800 transition-all shadow-lg shadow-black/5">
             Get Started
           </Button>
         </div>

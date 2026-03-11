@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +15,7 @@ import { FaGoogle, FaSpinner } from "react-icons/fa";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -26,6 +27,12 @@ export default function LoginPage() {
     resolver: zodResolver(loginSchema),
   });
 
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/dashboard");
+    }
+  }, [router, status]);
+
   const onSubmit = async (data: LoginInput) => {
     setIsLoading(true);
     setError("");
@@ -33,6 +40,7 @@ export default function LoginPage() {
       const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
+        callbackUrl: "/dashboard",
         redirect: false,
       });
 
@@ -42,11 +50,15 @@ export default function LoginPage() {
         return;
       }
 
-      if (result?.ok) {
-        router.push("/dashboard");
+      if (result?.url) {
+        router.replace(result.url);
         router.refresh();
+        return;
       }
-    } catch (error: any) {
+
+      setError("Login succeeded, but redirect failed.");
+      setIsLoading(false);
+    } catch {
       setError("A system error occurred.");
       setIsLoading(false);
     }
