@@ -12,6 +12,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { FaChevronDown } from "react-icons/fa6";
+import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export function Navbar({
   containerRef,
@@ -21,7 +23,7 @@ export function Navbar({
   const { scrollY } = useScroll({ container: containerRef });
   const router = useRouter();
   const [isProductsOpen, setIsProductsOpen] = useState(false);
-
+const { data: session } = useSession();
   // Shrink/Proportionate Logic
   const range = [0, 100];
   const navWidth = useTransform(scrollY, range, ["100%", "90%"]);
@@ -131,18 +133,27 @@ export function Navbar({
           ))}
         </div>
 
-        {/* Action */}
-        <div className="flex items-center space-x-6 relative z-10 hover:cursor-pointer ">
-          <Link
-            href="/login"
-            className="text-[12px] font-bold uppercase tracking-widest text-black/60 hover:text-black">
-            Login
-          </Link>
-          <Button
-            onClick={() => router.push("/signup")}
-            className="h-9 px-6 bg-black text-white hover:cursor-pointer rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-800 transition-all shadow-lg shadow-black/5">
-            Get Started
-          </Button>
+        <div className="flex items-center space-x-6 relative z-10">
+          {session ? (
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="text-[12px] font-bold uppercase tracking-widest text-red-500 hover:text-red-600">
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="text-[12px] font-bold uppercase tracking-widest text-black/60 hover:text-black">
+                Login
+              </Link>
+              <Button
+                onClick={() => router.push("/signup")}
+                className="h-9 px-6 bg-black text-white rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">
+                Get Started
+              </Button>
+            </>
+          )}
         </div>
       </motion.nav>
     </motion.div>

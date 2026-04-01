@@ -19,6 +19,17 @@ export async function POST(req: Request) {
       userId: session.user.id,
     },
   });
+  try {
+    // We don't 'await' this because we want the user to get their response FAST
+    fetch(`http://127.0.0.1:8000/intelligence/analyze/${journal.id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: journal.content }),
+    }).catch((err) => console.error("Neural Engine Trigger Failed:", err));
 
+    console.log(`[Next.js] Triggered analysis for Journal ID: ${journal.id}`);
+  } catch (error) {
+    console.error("Failed to contact FastAPI:", error);
+  }
   return NextResponse.json(journal);
 }
