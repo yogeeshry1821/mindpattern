@@ -39,10 +39,22 @@ export default async function DashboardPage() {
         }, 0) / analyzedEntries.length
       : 0;
   // Calculate Cognitive Load peaks
-  const highLoadCount = analyzedEntries.filter((j) => {
-    const data = j.analysis as string
-    return data.cognitive_load?.toLowerCase() === "high";
-  }).length;
+const highLoadCount = analyzedEntries.filter((j) => {
+  // 1. Check if j.analysis exists
+  if (!j.analysis) return false;
+
+  try {
+    // 2. Parse the string into an object
+    const data =
+      typeof j.analysis === "string" ? JSON.parse(j.analysis) : j.analysis;
+
+    // 3. Access the property safely
+    return data?.cognitive_load?.toLowerCase() === "high";
+  } catch (e) {
+    console.error("Failed to parse analysis JSON", e);
+    return false;
+  }
+}).length;
 
   // Determine Pattern Identity status
   const identityStatus =
@@ -50,7 +62,6 @@ export default async function DashboardPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-12 py-10  pt-24 px-6 relative">
-      <Navbar />
 
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/[0.03] pb-10">
         <div>

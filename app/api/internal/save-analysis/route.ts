@@ -6,9 +6,9 @@ export async function POST(req: NextRequest) {
     const { journal_id, analysis } = await req.json();
 
     const result = await prisma.journal.update({
-      where: { id: Number(journal_id) },
+      where: { id: journal_id },
       data: {
-        analysis: analysis, // you already added this field in migration
+        analysis: analysis, 
       },
     });
 

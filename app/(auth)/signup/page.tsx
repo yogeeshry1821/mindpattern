@@ -151,7 +151,6 @@ export default function SignupPage() {
           <div className="space-y-2">
             <Label
               htmlFor="password"
-              shaking
               className="text-[10px] uppercase tracking-[0.2em] text-[#8a8a8a] font-bold ml-1">
               Security Key
             </Label>
