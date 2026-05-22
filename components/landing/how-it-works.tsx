@@ -105,7 +105,6 @@ export function HowItWorks() {
                     &ldquo;{step.sub}&rdquo;
                   </div>
                   {/* High-End Visual Anchor */}
-                  // Replace the "Visual Anchor" div with this
                   <div className="mt-20 relative w-full aspect-[16/9] rounded-[40px] border border-ink-primary/[0.05] bg-white overflow-hidden group shadow-sm flex items-center justify-center">
                     <svg
                       width="100%"

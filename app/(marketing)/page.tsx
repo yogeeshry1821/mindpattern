@@ -9,7 +9,7 @@ import { Footer } from "@/components/landing/footer";
 export default function LandingPage() {
   return (
     <div id="landing-scroll" className="h-screen overflow-y-auto bg-surface-soft">
-
+      <Navbar/>
       <section className="min-h-screen">
         <Hero />
       </section>
