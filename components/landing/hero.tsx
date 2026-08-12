@@ -50,7 +50,7 @@ export function Hero() {
               {/* CHANGED: Arrow is now INSIDE the primary button. Added 'group' to animate the arrow on hover. */}
               <Button
                 onClick={() => router.push("/signup")}
-                className="group h-14 px-8 bg-[#1a1a1a] text-white rounded-full font-medium tracking-tight hover:bg-black transition-all shadow-2xl shadow-black/10 flex items-center gap-3">
+                className="group h-14 px-8   bg-[#1a1a1a] text-white rounded-full font-medium tracking-tight hover:bg-black transition-all cursor-pointer shadow-2xl shadow-black/10 flex items-center gap-3">
                 Start the Experience
                 <svg
                   className="w-5 h-5 transform transition-transform group-hover:translate-x-1"
